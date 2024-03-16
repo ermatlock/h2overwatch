@@ -1,0 +1,41 @@
+/* Form input fields styling */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"],
+select {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  width: 100%; /* Ensure full-width inputs */
+}
+
+/* Button styling */
+button {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #61dafb; /* Example primary color */
+  color: #fff;
+  cursor: pointer;
+  width: 100%; /* Match input fields width */
+}
+
+button:hover {
+  background-color: #007bff; /* Darker shade on hover */
+}
+
+/* Error message styling */
+.login-error {
+  color: #ff3860; /* Bright red for visibility */
+  margin-bottom: 20px;
+}
+
+/* Additional classes for specific button styles if needed */
+.login-button, .register-button {
+  /* Additional specific styling for login and register buttons if needed */
+}
