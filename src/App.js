@@ -1,17 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { auth } from './firebase-config';
+import { MantineProvider, createTheme } from '@mantine/core';
+import '@mantine/core/styles.css';
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import UserDashboard from './components/UserDashboard';
-import UserRegistrationForm from './components/UserRegistrationForm';
-import AdminDashboard from './components/AdminDashboard';
-import Login from './components/Login'; // Ensure this path matches where your Login component is saved
-import { fetchUserRole } from './services/firebaseService';
+import React, { useEffect, useState } from "react";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import "./App.css";
+import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
+import Login from "./components/login/Login"; // Ensure this path matches where your Login component is saved
+import RoboFlow from "./components/roboflow/RoboFlow";
+import UserDashboard from "./components/user-dashboard/UserDashboard";
+import UserRegistrationForm from "./components/user-registration/UserRegistrationForm";
+import { auth } from "./firebase-config";
+import { fetchUserRole } from "./services/firebaseService";
 
 function App() {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null); // State to store user role
+
+  const theme = createTheme({
+    /** Put your mantine theme override here */
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -39,18 +51,33 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {/* Redirect users to UserDashboard if they are logged in, otherwise to the Login page */}
-          <Route path="/" element={user ? <Navigate to="/UserDashboard" replace /> : <Navigate to="/Login" replace />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/UserDashboard" element={<UserDashboard handleLogout={handleLogout} />} />
-          <Route path="/register" element={<UserRegistrationForm />} />
-          <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        </Routes>
-      </div>
-    </Router>
+    <MantineProvider theme={theme}>
+      <Router>
+        <div className="App">
+          <Routes>
+            {/* Redirect users to UserDashboard if they are logged in, otherwise to the Login page */}
+            <Route
+              path="/"
+              element={
+                user ? (
+                  <Navigate to="/UserDashboard" replace />
+                ) : (
+                  <Navigate to="/Login" replace />
+                )
+              }
+            />
+            <Route path="/Login" element={<Login />} />
+            <Route
+              path="/UserDashboard"
+              element={<UserDashboard handleLogout={handleLogout} />}
+            />
+            <Route path="/register" element={<UserRegistrationForm />} />
+            <Route path="/AdminDashboard" element={<AdminDashboard />} />
+            <Route path="/roboflow" element={<RoboFlow />} />
+          </Routes>
+        </div>
+      </Router>
+    </MantineProvider>
   );
 }
 

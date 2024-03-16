@@ -1,23 +1,23 @@
 /**
  * @file AdminDashboard.js
- * @description This is the main administrative dashboard component for the H2Overwatch Tool Suite. 
+ * @description This is the main administrative dashboard component for the H2Overwatch Tool Suite.
  * It provides administrators with tools and analytics for system management.
- * 
+ *
  * @module components/AdminDashboard
  * @exports AdminDashboard
- * 
+ *
  * @author Jeffry Jones
  * @date 2024-02-03
  */
 
 import React from 'react';
 import { signOut } from "firebase/auth";
-import { auth } from '../firebase-config';
+import { auth } from '../../firebase-config';
 import { useNavigate } from 'react-router-dom';
 
 /**
  * Admin Dashboard component.
- * 
+ *
  * @returns {JSX.Element} The rendered Admin Dashboard component.
  */
 function AdminDashboard() {
@@ -25,7 +25,7 @@ function AdminDashboard() {
 
   /**
    * Handles the logout functionality.
-   * 
+   *
    * @async
    * @function handleLogout
    * @returns {Promise<void>} A promise that resolves when the user is signed out successfully.
